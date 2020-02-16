@@ -1,0 +1,5 @@
+.imageList {
+    width: 80%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
