@@ -10,7 +10,7 @@ input[type="search"] {
     9px center;
   border: solid 1px #ccc;
   padding: 9px 10px 9px 32px;
-  width: 120px;
+  width: 140px;
   border-radius: 10em;
   transition: all 0.5s;
 }

@@ -1,0 +1,10 @@
+.header {
+    padding: 2em;
+}
+
+.header-content {
+    display: grid;
+    grid-template-columns: 300px 300px 300px;
+    justify-content: center;
+    align-items: center;
+}   

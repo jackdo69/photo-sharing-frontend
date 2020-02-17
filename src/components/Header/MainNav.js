@@ -1,7 +1,13 @@
-import React from 'react';
+import React from "react";
 
+import "./MainNav.css";
 const MainNav = () => {
-    return ( <h3>Main Nav</h3> );
-}
- 
+  return (
+    <div className="mainNav">
+      <a class="active" href="">Account</a>
+      <a href="">Login</a>
+    </div>
+  );
+};
+
 export default MainNav;
