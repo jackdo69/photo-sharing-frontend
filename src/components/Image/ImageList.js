@@ -7,23 +7,33 @@ import "./ImageList.css";
 const DUMMY_IMAGES = [
   {
     name: "Big Ben",
-    url: "img/BigBenUK.jpg",
+    url: "img/pic1.jpg",
     id: 1
   },
   {
     name: "Opera House",
-    url: "img/OperaHouse.jpg",
+    url: "img/pic2.jpg",
     id: 2
   },
   {
     name: "Oxford University",
-    url: "img/OxfordUniversity.jpg",
+    url: "img/pic3.jpg",
     id: 3
   },
   {
     name: "The Ground of Alexandria",
-    url: "img/TheGroundOfAlexandria.jpg",
+    url: "img/pic4.jpg",
     id: 4
+  },
+  {
+    name: "The Ground of Alexandria",
+    url: "img/pic5.jpg",
+    id: 5
+  },
+  {
+    name: "The Ground of Alexandria",
+    url: "img/pic6.jpg",
+    id: 6
   }
 ];
 

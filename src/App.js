@@ -1,12 +1,14 @@
 import React from "react";
+
 import "./App.css";
 
+import Header from './components/Header/Header';
 import ImageList from "./components/Image/ImageList";
 
 const App = () => {
   return (
     <div className="App">
-      <h1>Main Page</h1>
+      <Header />
       <ImageList />
     </div>
   );
