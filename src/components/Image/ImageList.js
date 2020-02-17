@@ -1,6 +1,8 @@
 import React from "react";
 
+import Masonry from "react-masonry-css";
 import ImageItem from "./ImageItem";
+import "./ImageList.css";
 
 const DUMMY_IMAGES = [
   {
@@ -25,12 +27,27 @@ const DUMMY_IMAGES = [
   }
 ];
 
+const breakpointColumnsObj = {
+  default: 3,
+  1100: 3,
+  700: 2,
+  500: 1
+};
+
+const imageGrid = DUMMY_IMAGES.map(img => {
+  return <ImageItem src={img.url} alt={img.name} key={img.id} />;
+});
+
 const ImageList = () => {
   return (
     <div className="imageList">
-      {DUMMY_IMAGES.map(img => {
-        return <ImageItem src={img.url} alt={img.name} key={img.id} />;
-      })}
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {imageGrid}
+      </Masonry>
     </div>
   );
 };
