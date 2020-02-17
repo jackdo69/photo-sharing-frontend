@@ -12,7 +12,7 @@ const breakpointColumnsObj = {
 };
 
 let imageList = [];
-for (let i = 1; i <= 6; i++) {
+for (let i = 1; i <= 9; i++) {
   imageList.push({
     name: `pic ${i}`,
     url: `img/pic${i}.jpg`,

@@ -10,13 +10,13 @@ input[type="search"] {
     9px center;
   border: solid 1px #ccc;
   padding: 9px 10px 9px 32px;
-  width: 140px;
+  width: 240px;
   border-radius: 10em;
   transition: all 0.5s;
 }
 
 input[type="search"]:focus {
-  width: 180px;
+  width: 280px;
   background-color: #fff;
   border-color: #66cc75;
   box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);

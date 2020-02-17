@@ -5,7 +5,7 @@ import './Logo.css';
 const Logo = () => {
     return ( 
         <div className="logo">
-            <i class="fas fa-photo-video"></i>
+            <i class="fas fa-camera-retro"></i>
             <span class="slogan">Free high quality photos</span>
         </div>
      );
