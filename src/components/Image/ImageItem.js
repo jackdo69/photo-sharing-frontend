@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ImageItem.css";
 
 import Modal from "../Modal/Modal";
+import ImageDetails from "./ImageDetails";
 
 const ImageItem = props => {
   const [showDetails, setShowDetails] = useState(false);
@@ -15,7 +16,11 @@ const ImageItem = props => {
         onCancel={closeShowDetailsHandler}
         header={props.author}
       >
-        <p>This is the modal</p>
+        <ImageDetails
+          src={props.src}
+          name={props.name}
+          description={props.description}
+        />
       </Modal>
 
       <div onClick={openShowDetailsHandler} className="imageItem">
