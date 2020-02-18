@@ -11,7 +11,7 @@ import "./App.css";
 import User from "./pages/User/User";
 import Auth from "./pages/Auth/Auth";
 import Header from "./components/Header/Header";
-import ImageList from "./components/Image/ImageList";
+import ImageList from "./pages/ImageList/ImageList";
 
 const App = () => {
   let routes = (
