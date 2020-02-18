@@ -1,3 +1,44 @@
+.imageItem {
+  position: relative;
+  background-color: rgb(230, 227, 227);
+}
+
 .imageItem img {
+  opacity: 1;
   width: 100%;
+}
+
+.imageItem:hover img {
+  opacity: 0.8;
+  cursor: zoom-in;
+}
+
+.imageItem .utilities {
+  position: absolute;
+  top: 6%;
+  right: 10%;
+  opacity: 0;
+}
+
+.imageItem:hover .utilities {
+  opacity: 1;
+}
+
+ /* .utilities i {
+  color: rgb(102,102,102);
+  margin: 0.6em;
+} */
+.utilities button {
+  opacity: 0.8;
+  color: rgb(102,102,102);
+  cursor: pointer;
+  margin: 0.6em;
+  padding: 0.3em 1em 0.3em 1em;
+  border: none;
+  border-radius: 10px;
+  font-size: medium;
+}
+
+.utilities button:hover {
+  color: rgb(53, 46, 46);
 }
