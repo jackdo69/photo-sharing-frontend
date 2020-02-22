@@ -27,13 +27,13 @@ const ImageItem = props => {
         <img src={props.src} alt={props.alt} />
         <div className="utilities">
           <button>
-            <i class="fas fa-heart"></i>
+            <i className="fas fa-heart"></i>
           </button>
           <button>
-            <i class="fas fa-plus"></i>
+            <i className="fas fa-plus"></i>
           </button>
           <button>
-            <i class="fas fa-long-arrow-alt-down"></i>
+            <i className="fas fa-long-arrow-alt-down"></i>
           </button>
         </div>
       </div>

@@ -37,13 +37,13 @@ const Auth = () => {
 
   const switchModeHandler = () => {
     if (!isLoginMode) {
-      setFormField({
-        ...formState.inputs,
-        name: {
-          value: "",
-          isValid: false
-        }
-      });
+      setFormField(
+        {
+          ...formState.inputs,
+          name: undefined
+        },
+        formState.inputs.email.isValid && formState.inputs.password.isValid
+      );
     } else {
       setFormField(
         {
@@ -59,7 +59,40 @@ const Auth = () => {
     setIsLoginMode(prevMode => !prevMode);
   };
 
-  const authSubmitHandler = async event => {};
+  const authSubmitHandler = async event => {
+    event.preventDefault();
+
+    if (isLoginMode) {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/login",
+          "POST",
+          JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value
+          }),
+          {
+            "Content-Type": "application/json"
+          }
+        );
+        auth.login(responseData.userId, responseData.token);
+      } catch (err) {}
+    } else {
+      try {
+        const formData = new FormData();
+        formData.append("email", formState.inputs.email.value);
+        formData.append("name", formState.inputs.name.value);
+        formData.append("password", formState.inputs.password.value);
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/signup",
+          "POST",
+          formData
+        );
+
+        auth.login(responseData.userId, responseData.token);
+      } catch (err) {}
+    }
+  };
 
   return (
     <React.Fragment>

@@ -6,14 +6,15 @@ import {
   Switch
 } from "react-router-dom";
 
-import "./App.css";
-
 import User from "./pages/User/User";
 import Auth from "./pages/Auth/Auth";
 import Header from "./components/Header/Header";
 import ImageList from "./pages/ImageList/ImageList";
+import { AuthContext } from "./context/auth-context";
+import useAuth from "./hooks/auth-hook";
 
 const App = () => {
+  const { token, login, logout, userId } = useAuth();
   let routes = (
     <Switch>
       <Route path="/" exact>
@@ -29,12 +30,20 @@ const App = () => {
     </Switch>
   );
   return (
-    <div className="App">
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token: token,
+        userId: userId,
+        login: login,
+        logout: logout
+      }}
+    >
       <Router>
         <Header />
         {routes}
       </Router>
-    </div>
+    </AuthContext.Provider>
   );
 };
 
