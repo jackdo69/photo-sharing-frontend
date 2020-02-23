@@ -5,6 +5,7 @@ import Button from "../../components/Button/Button";
 import Card from "../../components/Card/Card";
 import Input from "../../components/Input/Input";
 import ErrorModal from "../../components/Modal/ErrorModal";
+import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 import {
@@ -40,7 +41,8 @@ const Auth = () => {
       setFormField(
         {
           ...formState.inputs,
-          name: undefined
+          name: undefined,
+          image: undefined
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
@@ -50,6 +52,10 @@ const Auth = () => {
           ...formState.inputs,
           name: {
             value: "",
+            isValid: false
+          },
+          image: {
+            value: null,
             isValid: false
           }
         },
@@ -85,6 +91,7 @@ const Auth = () => {
         formData.append("email", formState.inputs.email.value);
         formData.append("name", formState.inputs.name.value);
         formData.append("password", formState.inputs.password.value);
+        formData.append("image", formState.inputs.image.value);
         const responseData = await sendRequest(
           "http://localhost:5000/api/users/signup",
           "POST",
@@ -115,7 +122,14 @@ const Auth = () => {
               onInput={inputHandler}
             />
           )}
-
+          {!isLoginMode && (
+            <ImageUpload
+              center
+              id="image"
+              onInput={inputHandler}
+              errorText="Please provide an image"
+            />
+          )}
           <Input
             element="input"
             id="email"
