@@ -15,20 +15,33 @@ import useAuth from "./hooks/auth-hook";
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
-  let routes = (
-    <Switch>
-      <Route path="/" exact>
-        <ImageList />
-      </Route>
-      <Route path="/user" exact>
-        <User />
-      </Route>
-      <Route path="/auth">
-        <Auth />
-      </Route>
-      <Redirect to="/" />
-    </Switch>
-  );
+  let routes;
+  if (token) {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <ImageList />
+        </Route>
+        <Route path="/user" exact>
+          <User />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <ImageList />
+        </Route>
+        <Route path="/auth">
+          <Auth />
+        </Route>
+        <Redirect to="/auth" />
+      </Switch>
+    );
+  }
+  
   return (
     <AuthContext.Provider
       value={{

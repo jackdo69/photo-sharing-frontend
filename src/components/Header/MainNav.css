@@ -4,6 +4,7 @@
     color: rgb(130, 136, 136);
     margin: 1.5em;
     padding: 0.5em;
+    cursor: pointer;
 }
 
 .mainNav a::after {
@@ -19,4 +20,6 @@
 .mainNav a:hover::after {
     width: 100%;
 }
+
+
 

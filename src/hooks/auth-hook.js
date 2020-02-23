@@ -8,18 +8,20 @@ const useAuth = () => {
   const [tokenExp, setTokenExp] = useState();
 
   const login = useCallback((uid, token, expTime) => {
+    
     setToken(token);
     setUserId(uid);
 
     const tokenExpTime =
       expTime || new Date(new Date().getTime() + 1000 * 60 * 60);
     setTokenExp(tokenExpTime);
+    
     localStorage.setItem(
       "userData",
       JSON.stringify({
         userId: uid,
         token: token,
-        expiration: tokenExp.toISOString()
+        expiration: tokenExpTime.toISOString()
       })
     );
   }, []);
