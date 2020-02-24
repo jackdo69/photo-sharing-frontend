@@ -4,6 +4,7 @@ import "./User.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import ErrorModal from "../../components/Modal/ErrorModal";
 import Card from "../../components/Card/Card";
+import Button from "../../components/Button/Button";
 import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 import Tabs from "./Tabs";
@@ -22,6 +23,8 @@ const User = () => {
           `http://localhost:5000/api/users/${userId}`
         );
         setLoadedUser(responseData.user);
+        console.log(responseData);
+        
       } catch (err) {}
     };
     fetchUser();
@@ -48,17 +51,26 @@ const User = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      
-    <div className="user">
-    {!isLoading && loadedUser && <p>{loadedUser.email}</p>}
-      <hr />
-      <Tabs selected={1}>
-        <Panel title="Photos">This is the first panel</Panel>
-        <Panel title="Collection">This is the second panel</Panel>
-        <Panel title="Liked">This is the third panel</Panel>
-      </Tabs>
-    </div>
-      
+
+      <div className="userPage">
+        {!isLoading && loadedUser && (
+          <div className="userInfo">
+            <div className="profile">
+                <img src={`http://localhost:5000/${loadedUser.image}`} alt="Profile" />
+            </div>
+            <div className="userName"><p>@{loadedUser.name}</p></div>
+            <div className="addPhoto">
+                <Button>Add Photo</Button>
+            </div>
+          </div>
+        )}
+        <hr />
+        <Tabs selected={1}>
+          <Panel title="Photos">This is the first panel</Panel>
+          <Panel title="Collection">This is the second panel</Panel>
+          <Panel title="Liked">This is the third panel</Panel>
+        </Tabs>
+      </div>
     </React.Fragment>
   );
 };
