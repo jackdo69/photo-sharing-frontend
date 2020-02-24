@@ -42,10 +42,12 @@ const AddEditPhoto = props => {
       formData.append("name", formState.inputs.name.value);
       formData.append("description", formState.inputs.description.value);
       formData.append("image", formState.inputs.image.value);
-      await sendRequest("http://localhost:5000/api/photos", "POST", formData, {
+      const res = await sendRequest("http://localhost:5000/api/photos", "POST", formData, {
         Authorization: "Bearer " + auth.token
       });
       //Redirect the user to a different page
+      console.log(res);
+      
     } catch (err) {}
   };
 

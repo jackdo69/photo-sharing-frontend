@@ -25,7 +25,6 @@ const User = () => {
           `http://localhost:5000/api/users/${userId}`
         );
         setLoadedUser(responseData.user);
-        console.log(responseData);
         
       } catch (err) {}
     };
