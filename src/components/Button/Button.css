@@ -3,7 +3,7 @@
   padding: 0.5rem 1.5rem;
   border: 1px solid #0eb81c;
   border-radius: 4px;
-  background: #ff0055;
+  background: #4375ff;
   color: white;
   cursor: pointer;
   margin-right: 1rem;
@@ -17,7 +17,8 @@
 
 .button:hover,
 .button:active {
-  background: #ff4382;
+  background: #2fa4d3;
+  
   border-color: #0eb81c;
 }
 

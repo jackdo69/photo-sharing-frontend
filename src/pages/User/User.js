@@ -9,11 +9,13 @@ import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 import Tabs from "./Tabs";
 import Panel from "./Panel";
+import AddEditPhoto from './AddEditPhoto';
 
 const User = () => {
   const auth = useContext(AuthContext);
   const userId = auth.userId;
   const [loadedUser, setLoadedUser] = useState();
+  const [showAddEdit, setShowAddEdit] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const User = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-
+      <AddEditPhoto showAddEdit={showAddEdit} onClear={() => setShowAddEdit(false)}/>
       <div className="userPage">
         {!isLoading && loadedUser && (
           <div className="userInfo">
@@ -60,7 +62,7 @@ const User = () => {
             </div>
             <div className="userName"><p>@{loadedUser.name}</p></div>
             <div className="addPhoto">
-                <Button>Add Photo</Button>
+                <Button onClick={() => setShowAddEdit(true)}>Add Photo</Button>
             </div>
           </div>
         )}
