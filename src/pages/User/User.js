@@ -6,6 +6,8 @@ import ErrorModal from "../../components/Modal/ErrorModal";
 import Card from "../../components/Card/Card";
 import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
+import Tabs from "./Tabs";
+import Panel from "./Panel";
 
 const User = () => {
   const auth = useContext(AuthContext);
@@ -23,7 +25,7 @@ const User = () => {
       } catch (err) {}
     };
     fetchUser();
-  },[sendRequest, userId]);
+  }, [sendRequest, userId]);
 
   if (isLoading) {
     return (
@@ -46,7 +48,17 @@ const User = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      {!isLoading && loadedUser && <p>{loadedUser.email}</p>}
+      
+    <div className="user">
+    {!isLoading && loadedUser && <p>{loadedUser.email}</p>}
+      <hr />
+      <Tabs selected={1}>
+        <Panel title="Photos">This is the first panel</Panel>
+        <Panel title="Collection">This is the second panel</Panel>
+        <Panel title="Liked">This is the third panel</Panel>
+      </Tabs>
+    </div>
+      
     </React.Fragment>
   );
 };
