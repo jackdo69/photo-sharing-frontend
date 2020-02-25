@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-
 import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
@@ -34,20 +33,24 @@ const AddEditPhoto = props => {
     },
     false
   );
-
   const photoSubmitHandler = async event => {
-    event.preventDefault();
+    // event.preventDefault();
     try {
       const formData = new FormData();
       formData.append("name", formState.inputs.name.value);
       formData.append("description", formState.inputs.description.value);
       formData.append("image", formState.inputs.image.value);
-      const res = await sendRequest("http://localhost:5000/api/photos", "POST", formData, {
-        Authorization: "Bearer " + auth.token
-      });
+      const res = await sendRequest(
+        "http://localhost:5000/api/photos",
+        "POST",
+        formData,
+        {
+          Authorization: "Bearer " + auth.token
+        }
+      );
       //Redirect the user to a different page
+    //   history.push("/user")
       console.log(res);
-      
     } catch (err) {}
   };
 
@@ -59,7 +62,11 @@ const AddEditPhoto = props => {
         onCancel={props.onClear}
         header="Add a photo"
         show={props.showAddEdit}
-        footer={<Button onClick={props.onClear}>CANCEL</Button>}
+        footer={
+          <Button type="button" onClick={props.onClear}>
+            CANCEL
+          </Button>
+        }
       >
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
