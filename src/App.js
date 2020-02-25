@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/user" exact>
           <User />
         </Route>
-        <Redirect to="/" />
+        <Redirect to="/user" />
       </Switch>
     );
   } else {

@@ -9,7 +9,7 @@ import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 import Tabs from "./Tabs";
 import Panel from "./Panel";
-import AddEditPhoto from './AddEditPhoto';
+import AddEditPhoto from "./AddEditPhoto";
 
 const User = () => {
   const auth = useContext(AuthContext);
@@ -25,7 +25,6 @@ const User = () => {
           `http://localhost:5000/api/users/${userId}`
         );
         setLoadedUser(responseData.user);
-        
       } catch (err) {}
     };
     fetchUser();
@@ -48,25 +47,37 @@ const User = () => {
       </div>
     );
   }
+  console.log(loadedUser);
 
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <AddEditPhoto showAddEdit={showAddEdit} onClear={() => setShowAddEdit(false)}/>
+      <AddEditPhoto
+        showAddEdit={showAddEdit}
+        onClear={() => setShowAddEdit(false)}
+      />
       <div className="userPage">
         {!isLoading && loadedUser && (
-          <div className="userInfo">
+          <div className="userPanel">
             <div className="profile">
-                <img src={`http://localhost:5000/${loadedUser.image}`} alt="Profile" />
+              <img
+                src={`http://localhost:5000/${loadedUser.image}`}
+                alt="Profile"
+              />
             </div>
-            <div className="userName"><p>@{loadedUser.name}</p></div>
+            <div className="userInfo">
+              <p>@{loadedUser.name}</p>
+              
+                <span className="introduction">{loadedUser.introduction}</span>
+              
+            </div>
             <div className="addPhoto">
-                <Button onClick={() => setShowAddEdit(true)}>Add Photo</Button>
+              <Button onClick={() => setShowAddEdit(true)}>Add Photo</Button>
             </div>
           </div>
         )}
         <hr />
-        <Tabs selected={1}>
+        <Tabs selected={0}>
           <Panel title="Photos">This is the first panel</Panel>
           <Panel title="Collection">This is the second panel</Panel>
           <Panel title="Liked">This is the third panel</Panel>

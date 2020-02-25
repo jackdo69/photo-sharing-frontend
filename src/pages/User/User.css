@@ -3,7 +3,7 @@
     margin: 1em auto;
 }
 
-.userInfo {
+.userPanel {
     display: flex;
     justify-content: space-between;
 }
@@ -29,12 +29,13 @@
       align-items: flex-end;
   }
 
-  .userName {
-      display: flex;
-      align-items: flex-end;
-  }
 
-  .userName p {
+  .userInfo p {
       color: rgb(102, 102, 102);
       font-size: large;
+  }
+
+  .userInfo .introduction {
+    color: rgb(102, 102, 102);
+    font-style: oblique;
   }

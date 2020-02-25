@@ -14,7 +14,7 @@ const ImageItem = props => {
       <Modal
         show={showDetails}
         onCancel={closeShowDetailsHandler}
-        header={props.author}
+        header={props.name}
       >
         <ImageDetails
           src={props.src}

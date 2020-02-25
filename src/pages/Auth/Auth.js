@@ -54,6 +54,10 @@ const Auth = () => {
             value: "",
             isValid: false
           },
+          introduction: {
+            value: "",
+            isValid: false
+          },
           image: {
             value: null,
             isValid: false
@@ -90,6 +94,7 @@ const Auth = () => {
         const formData = new FormData();
         formData.append("email", formState.inputs.email.value);
         formData.append("name", formState.inputs.name.value);
+        formData.append("introduction", formState.inputs.introduction.value);
         formData.append("password", formState.inputs.password.value);
         formData.append("image", formState.inputs.image.value);
         const responseData = await sendRequest(
@@ -119,6 +124,17 @@ const Auth = () => {
               label="Your Name"
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Please enter a name."
+              onInput={inputHandler}
+            />
+          )}
+          {!isLoginMode && (
+            <Input
+              element="input"
+              id="introduction"
+              type="text"
+              label="Introduce yourself"
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please say something about you."
               onInput={inputHandler}
             />
           )}
