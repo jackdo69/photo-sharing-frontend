@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./ImageItem.css";
 
 import Modal from "../Modal/Modal";
 import ImageDetails from "./ImageDetails";
+import {AuthContext} from '../../context/auth-context';
 
 const ImageItem = props => {
+  const auth = useContext(AuthContext);
   const [showDetails, setShowDetails] = useState(false);
   const openShowDetailsHandler = () => setShowDetails(true);
   const closeShowDetailsHandler = () => setShowDetails(false);
+
+
+  let controls;
+  if (auth.userId === props.creator) {
+    controls = (
+<div className="controls">
+          <button>
+          <i className="fas fa-edit"></i>
+          </button>
+          <button>
+          <i className="fas fa-trash-alt"></i>
+          </button>
+        </div>
+    );
+  }
 
   return (
     <React.Fragment>
@@ -36,6 +53,7 @@ const ImageItem = props => {
             <i className="fas fa-long-arrow-alt-down"></i>
           </button>
         </div>
+        {controls}
       </div>
     </React.Fragment>
   );

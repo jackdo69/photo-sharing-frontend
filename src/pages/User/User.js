@@ -44,7 +44,6 @@ const User = () => {
         let res = await sendRequest(
           `http://localhost:5000/api/photos/${userId}`
         );
-        console.log(res);
 
         setUploadedPhotos(res.photos);
       } catch (err) {
@@ -57,7 +56,7 @@ const User = () => {
       fetchUploadedPhotos();
     }
   }, [sendRequest, userId]);
-
+  
   if (isLoading) {
     return (
       <div className="center">
@@ -65,6 +64,7 @@ const User = () => {
       </div>
     );
   }
+  
 
   if (!loadedUser && !error) {
     return (
@@ -84,7 +84,7 @@ const User = () => {
           src={`http://localhost:5000/${photo.image}`}
           alt={photo.name}
           key={photo.id}
-          author={photo.creator}
+          creator={photo.creator}
           description={photo.description}
           name={photo.name}
         />

@@ -20,7 +20,15 @@
   opacity: 0;
 }
 
-.imageItem:hover .utilities {
+.imageItem .controls {
+  position: absolute;
+  bottom: 6%;
+  right: 10%;
+  opacity: 0;
+}
+
+.imageItem:hover .utilities,
+.imageItem:hover .controls {
   opacity: 1;
 }
 
@@ -28,7 +36,8 @@
   color: rgb(102,102,102);
   margin: 0.6em;
 } */
-.utilities button {
+.utilities button,
+.controls button {
   opacity: 0.8;
   color: rgb(102,102,102);
   cursor: pointer;
@@ -39,6 +48,6 @@
   font-size: medium;
 }
 
-.utilities button:hover {
+.utilities, .controls button:hover {
   color: rgb(53, 46, 46);
 }
