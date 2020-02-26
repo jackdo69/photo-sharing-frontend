@@ -3,26 +3,29 @@ import "./ImageItem.css";
 
 import Modal from "../Modal/Modal";
 import ImageDetails from "./ImageDetails";
-import {AuthContext} from '../../context/auth-context';
+import { AuthContext } from "../../context/auth-context";
 
 const ImageItem = props => {
   const auth = useContext(AuthContext);
   const [showDetails, setShowDetails] = useState(false);
-  const openShowDetailsHandler = () => setShowDetails(true);
+  const openShowDetailsHandler = event => {
+    setShowDetails(true);
+    event.stopPropagation();
+  };
   const closeShowDetailsHandler = () => setShowDetails(false);
-
+  
 
   let controls;
   if (auth.userId === props.creator) {
     controls = (
-<div className="controls">
-          <button>
+      <div className="controls">
+        <button onClick={props.showEdit}>
           <i className="fas fa-edit"></i>
-          </button>
-          <button>
+        </button>
+        <button>
           <i className="fas fa-trash-alt"></i>
-          </button>
-        </div>
+        </button>
+      </div>
     );
   }
 
@@ -40,7 +43,7 @@ const ImageItem = props => {
         />
       </Modal>
 
-      <div onClick={openShowDetailsHandler} className="imageItem">
+      <div onClick={(e) => openShowDetailsHandler(e)} className="imageItem">
         <img src={props.src} alt={props.alt} />
         <div className="utilities">
           <button>

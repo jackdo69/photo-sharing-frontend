@@ -10,7 +10,8 @@ import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 import Tabs from "./Tabs";
 import Panel from "./Panel";
-import AddEditPhoto from "./AddEditPhoto";
+import AddPhoto from "./AddPhoto";
+import EditPhoto from "./EditPhoto";
 import Masonry from "react-masonry-css";
 
 //Masonry setup
@@ -26,7 +27,9 @@ const User = () => {
   const userId = auth.userId;
   const [loadedUser, setLoadedUser] = useState();
   const [uploadedPhotos, setUploadedPhotos] = useState();
-  const [showAddEdit, setShowAddEdit] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [editId, setEditId] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   useEffect(() => {
@@ -56,6 +59,12 @@ const User = () => {
       fetchUploadedPhotos();
     }
   }, [sendRequest, userId]);
+
+  const showEditHandler = (id) => {
+    setShowEdit(true);
+    setEditId(id);
+    
+  }
   
   if (isLoading) {
     return (
@@ -64,7 +73,6 @@ const User = () => {
       </div>
     );
   }
-  
 
   if (!loadedUser && !error) {
     return (
@@ -81,6 +89,7 @@ const User = () => {
     photosGrid = uploadedPhotos.map(photo => {
       return (
         <ImageItem
+          showEdit={() => showEditHandler(photo.id)}
           src={`http://localhost:5000/${photo.image}`}
           alt={photo.name}
           key={photo.id}
@@ -95,9 +104,11 @@ const User = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <AddEditPhoto
-        showAddEdit={showAddEdit}
-        onClear={() => setShowAddEdit(false)}
+      <AddPhoto showAdd={showAdd} onClear={() => setShowAdd(false)} />
+      <EditPhoto
+        photoId={editId}
+        showEdit={showEdit}
+        onClear={() => setShowEdit(false)}
       />
       <div className="userPage">
         {!isLoading && loadedUser && (
@@ -114,7 +125,7 @@ const User = () => {
               <span className="introduction">{loadedUser.introduction}</span>
             </div>
             <div className="addPhoto">
-              <Button onClick={() => setShowAddEdit(true)}>Add Photo</Button>
+              <Button onClick={() => setShowAdd(true)}>Add Photo</Button>
             </div>
           </div>
         )}

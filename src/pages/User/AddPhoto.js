@@ -13,7 +13,7 @@ import { useForm } from "../../hooks/form-hook";
 import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 
-const AddEditPhoto = props => {
+const AddPhoto = props => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm(
@@ -61,7 +61,7 @@ const AddEditPhoto = props => {
         onSubmit={photoSubmitHandler}
         onCancel={props.onClear}
         header="Add a photo"
-        show={props.showAddEdit}
+        show={props.showAdd}
         footer={
           <Button type="button" onClick={props.onClear}>
             CANCEL
@@ -99,4 +99,4 @@ const AddEditPhoto = props => {
   );
 };
 
-export default AddEditPhoto;
+export default AddPhoto;
