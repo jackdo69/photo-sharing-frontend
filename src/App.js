@@ -22,26 +22,26 @@ const App = () => {
         <Route path="/" exact>
           <ImageList />
         </Route>
-        <Route path="/user" exact>
+        <Route path="/:userId" exact>
           <User />
         </Route>
-        <Redirect to="/user" />
       </Switch>
     );
+    
   } else {
     routes = (
       <Switch>
         <Route path="/" exact>
           <ImageList />
         </Route>
-        <Route path="/auth">
+        <Route path="/auth" exact>
           <Auth />
         </Route>
         <Redirect to="/auth" />
       </Switch>
     );
   }
-  
+
   return (
     <AuthContext.Provider
       value={{

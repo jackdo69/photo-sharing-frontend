@@ -8,7 +8,7 @@ const MainNav = () => {
   const auth = useContext(AuthContext);
   return (
     <div className="mainNav">
-      <NavLink to="/user">Account</NavLink>
+      <NavLink to={`/${auth.userId}`}>Account</NavLink>
       {!auth.isLoggedIn ? (
         <NavLink to="/auth">Login</NavLink>
       ) : (

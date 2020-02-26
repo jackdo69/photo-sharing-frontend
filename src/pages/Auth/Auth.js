@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./Auth.css";
-
+import {useHistory} from 'react-router-dom';
 import Button from "../../components/Button/Button";
 import Card from "../../components/Card/Card";
 import Input from "../../components/Input/Input";
@@ -19,6 +19,7 @@ import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 
 const Auth = () => {
+  const history = useHistory();
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -85,9 +86,9 @@ const Auth = () => {
             "Content-Type": "application/json"
           }
         );
-        console.log(responseData);
 
         auth.login(responseData.userId, responseData.token);
+        history.push(`/${responseData.userId}`);
       } catch (err) {}
     } else {
       try {

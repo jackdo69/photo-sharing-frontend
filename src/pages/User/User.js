@@ -27,7 +27,10 @@ const User = () => {
         setLoadedUser(responseData.user);
       } catch (err) {}
     };
-    fetchUser();
+    if (userId) {
+      fetchUser();
+    }
+    
   }, [sendRequest, userId]);
 
   if (isLoading) {
@@ -47,7 +50,6 @@ const User = () => {
       </div>
     );
   }
-  console.log(loadedUser);
 
   return (
     <React.Fragment>
@@ -78,7 +80,7 @@ const User = () => {
         )}
         <hr />
         <Tabs selected={0}>
-          <Panel title="Photos">This is the first panel</Panel>
+          <Panel title="Uploaded">This is the first panel</Panel>
           <Panel title="Collection">This is the second panel</Panel>
           <Panel title="Liked">This is the third panel</Panel>
         </Tabs>

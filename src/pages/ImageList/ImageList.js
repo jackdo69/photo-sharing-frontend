@@ -30,8 +30,6 @@ const ImageList = () => {
   }, [sendRequest]);
   let photosGrid;
   if (loadedPhotos) {
-    console.log(loadedPhotos);
-    
     photosGrid = loadedPhotos.map(photo => {
       return (
         <ImageItem
