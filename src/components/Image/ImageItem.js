@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import "./ImageItem.css";
 
+import { useParams } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import ImageDetails from "./ImageDetails";
 import { AuthContext } from "../../context/auth-context";
 
 const ImageItem = props => {
+  const params = useParams();
   const auth = useContext(AuthContext);
   const [showDetails, setShowDetails] = useState(false);
   const openShowDetailsHandler = event => {
@@ -16,7 +18,7 @@ const ImageItem = props => {
   
 
   let controls;
-  if (auth.userId === props.creator) {
+  if (auth.userId === props.creator && params.userId) {
     controls = (
       <div className="controls">
         <button onClick={props.showEdit}>
@@ -27,8 +29,22 @@ const ImageItem = props => {
         </button>
       </div>
     );
+  } else {
+    controls = (
+      <div className="utilities">
+          <button>
+            <i className="fas fa-heart"></i>
+          </button>
+          <button>
+            <i className="fas fa-plus"></i>
+          </button>
+          <button>
+            <i className="fas fa-long-arrow-alt-down"></i>
+          </button>
+        </div>
+    );
   }
-
+  
   return (
     <React.Fragment>
       <Modal
@@ -43,19 +59,9 @@ const ImageItem = props => {
         />
       </Modal>
 
-      <div onClick={(e) => openShowDetailsHandler(e)} className="imageItem">
-        <img src={props.src} alt={props.alt} />
-        <div className="utilities">
-          <button>
-            <i className="fas fa-heart"></i>
-          </button>
-          <button>
-            <i className="fas fa-plus"></i>
-          </button>
-          <button>
-            <i className="fas fa-long-arrow-alt-down"></i>
-          </button>
-        </div>
+      <div  className="imageItem">
+        <img src={props.src} alt={props.alt} onClick={(e) => openShowDetailsHandler(e)}/>
+        
         {controls}
       </div>
     </React.Fragment>

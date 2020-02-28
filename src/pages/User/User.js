@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import "./User.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import ErrorModal from "../../components/Modal/ErrorModal";
-import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
 import ImageItem from "../../components/Image/ImageItem";
 import { useHttpClient } from "../../hooks/http-hook";
@@ -29,9 +28,10 @@ const User = () => {
   const [uploadedPhotos, setUploadedPhotos] = useState();
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-  const [editId, setEditId] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
+  //Runs after everytime User component render or updates
+  //the 'sendRequest' and 'userId'
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -45,13 +45,11 @@ const User = () => {
     const fetchUploadedPhotos = async () => {
       try {
         let res = await sendRequest(
-          `http://localhost:5000/api/photos/${userId}`
+          `http://localhost:5000/api/photos/user/${userId}`
         );
 
         setUploadedPhotos(res.photos);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
 
     if (userId) {
@@ -60,12 +58,13 @@ const User = () => {
     }
   }, [sendRequest, userId]);
 
-  const showEditHandler = (id) => {
+  let photoEdit;
+  const showEditHandler = id => {
+    photoEdit = uploadedPhotos.filter(e => e.id === id);
+    console.log(photoEdit);
     setShowEdit(true);
-    setEditId(id);
-    
-  }
-  
+  };
+
   if (isLoading) {
     return (
       <div className="center">
@@ -74,29 +73,28 @@ const User = () => {
     );
   }
 
-  if (!loadedUser && !error) {
-    return (
-      <div className="center">
-        <Card>
-          <h2>Could not find user!</h2>
-        </Card>
-      </div>
-    );
-  }
-
   let photosGrid;
   if (uploadedPhotos) {
     photosGrid = uploadedPhotos.map(photo => {
       return (
-        <ImageItem
-          showEdit={() => showEditHandler(photo.id)}
-          src={`http://localhost:5000/${photo.image}`}
-          alt={photo.name}
-          key={photo.id}
-          creator={photo.creator}
-          description={photo.description}
-          name={photo.name}
-        />
+        <React.Fragment
+        
+        key={photo.id}>
+          <ImageItem
+            showEdit={() => showEditHandler(photo.id)}
+            src={`http://localhost:5000/${photo.image}`}
+            alt={photo.name}
+            creator={photo.creator}
+            description={photo.description}
+            name={photo.name}
+          />
+          <EditPhoto
+            photoName={photo.name}
+            photoDescription={photo.description}
+            showEdit={showEdit}
+            onClear={() => setShowEdit(false)}
+          />
+        </React.Fragment>
       );
     });
   }
@@ -105,11 +103,7 @@ const User = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <AddPhoto showAdd={showAdd} onClear={() => setShowAdd(false)} />
-      <EditPhoto
-        photoId={editId}
-        showEdit={showEdit}
-        onClear={() => setShowEdit(false)}
-      />
+
       <div className="userPage">
         {!isLoading && loadedUser && (
           <div className="userPanel">

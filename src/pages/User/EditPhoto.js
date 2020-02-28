@@ -16,15 +16,15 @@ const EditPhoto = props => {
   const [formState, inputHandler] = useForm(
     {
       name: {
-        value: "",
-        isValid: false
+        value: props.photoName,
+        isValid: true
       },
       description: {
-        value: "",
-        isValid: false
+        value: props.photoDescription,
+        isValid: true
       }
     },
-    false
+    true
   );
   const photoSubmitHandler = async event => {
     // event.preventDefault();
@@ -59,6 +59,7 @@ const EditPhoto = props => {
       >
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
+          initialValue={props.photoName}
           id="name"
           element="input"
           type="text"
@@ -68,6 +69,7 @@ const EditPhoto = props => {
           onInput={inputHandler}
         />
         <Input
+          initialValue={props.photoDescription}
           id="description"
           element="textarea"
           label="Description"
