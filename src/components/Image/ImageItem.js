@@ -3,25 +3,25 @@ import "./ImageItem.css";
 
 import { useParams } from "react-router-dom";
 import Modal from "../Modal/Modal";
+import Backdrop from "../Backdrop/Backdrop";
 import ImageDetails from "./ImageDetails";
+import EditPhoto from "../../pages/User/EditPhoto";
 import { AuthContext } from "../../context/auth-context";
 
 const ImageItem = props => {
   const params = useParams();
   const auth = useContext(AuthContext);
   const [showDetails, setShowDetails] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const openShowDetailsHandler = event => {
     setShowDetails(true);
     event.stopPropagation();
   };
-  const closeShowDetailsHandler = () => setShowDetails(false);
-  
-
   let controls;
   if (auth.userId === props.creator && params.userId) {
     controls = (
       <div className="controls">
-        <button onClick={props.showEdit}>
+        <button onClick={() => setShowEdit(true)}>
           <i className="fas fa-edit"></i>
         </button>
         <button>
@@ -32,24 +32,32 @@ const ImageItem = props => {
   } else {
     controls = (
       <div className="utilities">
-          <button>
-            <i className="fas fa-heart"></i>
-          </button>
-          <button>
-            <i className="fas fa-plus"></i>
-          </button>
-          <button>
-            <i className="fas fa-long-arrow-alt-down"></i>
-          </button>
-        </div>
+        <button>
+          <i className="fas fa-heart"></i>
+        </button>
+        <button>
+          <i className="fas fa-plus"></i>
+        </button>
+        <button>
+          <i className="fas fa-long-arrow-alt-down"></i>
+        </button>
+      </div>
     );
   }
-  
+
   return (
     <React.Fragment>
+      {showDetails && <Backdrop onClick={() => setShowDetails(false)} />}
+      {showEdit && <Backdrop onClick={() => setShowEdit(false)} />}
+      <EditPhoto
+        name={props.name}
+        description={props.description}
+        showEdit={showEdit}
+        onClear={() => setShowEdit(false)}
+      />
       <Modal
         show={showDetails}
-        onCancel={closeShowDetailsHandler}
+        onCancel={() => setShowDetails(false)}
         header={props.name}
       >
         <ImageDetails
@@ -59,9 +67,13 @@ const ImageItem = props => {
         />
       </Modal>
 
-      <div  className="imageItem">
-        <img src={props.src} alt={props.alt} onClick={(e) => openShowDetailsHandler(e)}/>
-        
+      <div className="imageItem">
+        <img
+          src={props.src}
+          alt={props.alt}
+          onClick={e => openShowDetailsHandler(e)}
+        />
+
         {controls}
       </div>
     </React.Fragment>

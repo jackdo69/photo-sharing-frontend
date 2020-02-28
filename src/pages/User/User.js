@@ -5,13 +5,12 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import ErrorModal from "../../components/Modal/ErrorModal";
 import Button from "../../components/Button/Button";
 import ImageItem from "../../components/Image/ImageItem";
-import Backdrop from '../../components/Backdrop/Backdrop';
+import Backdrop from "../../components/Backdrop/Backdrop";
 import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 import Tabs from "./Tabs";
 import Panel from "./Panel";
 import AddPhoto from "./AddPhoto";
-import EditPhoto from "./EditPhoto";
 import Masonry from "react-masonry-css";
 
 //Masonry setup
@@ -28,7 +27,6 @@ const User = () => {
   const [loadedUser, setLoadedUser] = useState();
   const [uploadedPhotos, setUploadedPhotos] = useState();
   const [showAdd, setShowAdd] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   //Runs after everytime User component render or updates
@@ -67,39 +65,29 @@ const User = () => {
     );
   }
 
-  
-
   let photosGrid;
   if (uploadedPhotos) {
     photosGrid = uploadedPhotos.map(photo => {
       return (
-        <React.Fragment
-        
-        key={photo.id}>
+        <React.Fragment key={photo.id}>
           <ImageItem
-            showEdit={() => setShowEdit(true)}
             src={`http://localhost:5000/${photo.image}`}
             alt={photo.name}
             creator={photo.creator}
             description={photo.description}
             name={photo.name}
-          />
-          <EditPhoto
-            photoName={photo.name}
-            photoDescription={photo.description}
-            showEdit={showEdit}
-            onClear={() => setShowEdit(false)}
+            id={photo.id}
           />
         </React.Fragment>
       );
     });
   }
+  
 
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {showAdd && <Backdrop onClick={() => setShowAdd(false)} />}
-      {showEdit && <Backdrop onClick={() => setShowEdit(false)} />}
 
       <AddPhoto showAdd={showAdd} onClear={() => setShowAdd(false)} />
 

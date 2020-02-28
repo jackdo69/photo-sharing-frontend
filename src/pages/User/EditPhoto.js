@@ -16,11 +16,11 @@ const EditPhoto = props => {
   const [formState, inputHandler] = useForm(
     {
       name: {
-        value: props.photoName,
+        value: props.name,
         isValid: true
       },
       description: {
-        value: props.photoDescription,
+        value: props.description,
         isValid: true
       }
     },
@@ -42,6 +42,7 @@ const EditPhoto = props => {
       );
     } catch (err) {}
   };
+  
 
   return (
     <React.Fragment>
@@ -59,7 +60,7 @@ const EditPhoto = props => {
       >
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
-          initialValue={props.photoName}
+          initialValue={formState.inputs.name.value}
           id="name"
           element="input"
           type="text"
@@ -69,7 +70,7 @@ const EditPhoto = props => {
           onInput={inputHandler}
         />
         <Input
-          initialValue={props.photoDescription}
+          initialValue={formState.inputs.description.value}
           id="description"
           element="textarea"
           label="Description"
