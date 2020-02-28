@@ -5,6 +5,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import ErrorModal from "../../components/Modal/ErrorModal";
 import Button from "../../components/Button/Button";
 import ImageItem from "../../components/Image/ImageItem";
+import Backdrop from '../../components/Backdrop/Backdrop';
 import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 import Tabs from "./Tabs";
@@ -58,13 +59,6 @@ const User = () => {
     }
   }, [sendRequest, userId]);
 
-  let photoEdit;
-  const showEditHandler = id => {
-    photoEdit = uploadedPhotos.filter(e => e.id === id);
-    console.log(photoEdit);
-    setShowEdit(true);
-  };
-
   if (isLoading) {
     return (
       <div className="center">
@@ -72,6 +66,8 @@ const User = () => {
       </div>
     );
   }
+
+  
 
   let photosGrid;
   if (uploadedPhotos) {
@@ -81,7 +77,7 @@ const User = () => {
         
         key={photo.id}>
           <ImageItem
-            showEdit={() => showEditHandler(photo.id)}
+            showEdit={() => setShowEdit(true)}
             src={`http://localhost:5000/${photo.image}`}
             alt={photo.name}
             creator={photo.creator}
@@ -102,6 +98,9 @@ const User = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
+      {showAdd && <Backdrop onClick={() => setShowAdd(false)} />}
+      {showEdit && <Backdrop onClick={() => setShowEdit(false)} />}
+
       <AddPhoto showAdd={showAdd} onClear={() => setShowAdd(false)} />
 
       <div className="userPage">
