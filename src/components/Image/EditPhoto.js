@@ -1,9 +1,9 @@
 import React from "react";
-import Modal from "../../components/Modal/Modal";
-import Button from "../../components/Button/Button";
-import Input from "../../components/Input/Input";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import ErrorModal from "../../components/Modal/ErrorModal";
+import Modal from "../Modal/Modal";
+import Button from "../Button/Button";
+import Input from "../Input/Input";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import ErrorModal from "../Modal/ErrorModal";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH
@@ -28,18 +28,23 @@ const EditPhoto = props => {
   );
   const photoSubmitHandler = async event => {
     // event.preventDefault();
+    console.log(props);
+    
     try {
-      await sendRequest(
-        `http://localhost:5000/api/photos/${props.photoId}`,
+      const res = await sendRequest(
+        `http://localhost:5000/api/photos/${props.id}`,
         "PATCH",
         JSON.stringify({
           name: formState.inputs.name.value,
-          description: formState.inputs.description.value
+          description: formState.inputs.description.value,
+          creator: props.creator
         }),
         {
           "Content-Type": "application/json"
         }
       );
+      console.log(res);
+      
     } catch (err) {}
   };
   

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import Backdrop from "../Backdrop/Backdrop";
 import ImageDetails from "./ImageDetails";
-import EditPhoto from "../../pages/User/EditPhoto";
+import EditPhoto from "./EditPhoto";
 import { AuthContext } from "../../context/auth-context";
 
 const ImageItem = props => {
@@ -54,6 +54,8 @@ const ImageItem = props => {
         description={props.description}
         showEdit={showEdit}
         onClear={() => setShowEdit(false)}
+        id={props.id}
+        creator={props.creator}
       />
       <Modal
         show={showDetails}
