@@ -6,6 +6,7 @@ import Modal from "../Modal/Modal";
 import Backdrop from "../Backdrop/Backdrop";
 import ImageDetails from "./ImageDetails";
 import EditPhoto from "./EditPhoto";
+import DeletePhoto from "./DeletePhoto";
 import { AuthContext } from "../../context/auth-context";
 
 const ImageItem = props => {
@@ -13,6 +14,7 @@ const ImageItem = props => {
   const auth = useContext(AuthContext);
   const [showDetails, setShowDetails] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   const openShowDetailsHandler = event => {
     setShowDetails(true);
     event.stopPropagation();
@@ -24,7 +26,7 @@ const ImageItem = props => {
         <button onClick={() => setShowEdit(true)}>
           <i className="fas fa-edit"></i>
         </button>
-        <button>
+        <button onClick={() => setShowDelete(true)}>
           <i className="fas fa-trash-alt"></i>
         </button>
       </div>
@@ -49,11 +51,20 @@ const ImageItem = props => {
     <React.Fragment>
       {showDetails && <Backdrop onClick={() => setShowDetails(false)} />}
       {showEdit && <Backdrop onClick={() => setShowEdit(false)} />}
+      {showDelete && <Backdrop onClick={() => setShowDelete(false)} />}
       <EditPhoto
         name={props.name}
         description={props.description}
         showEdit={showEdit}
         onClear={() => setShowEdit(false)}
+        id={props.id}
+        creator={props.creator}
+      />
+      <DeletePhoto
+        name={props.name}
+        description={props.description}
+        showDelete={showDelete}
+        onClear={() => setShowDelete(false)}
         id={props.id}
         creator={props.creator}
       />
