@@ -12,5 +12,9 @@
   /* Style your items */
   .my-masonry-grid_column > .imageItem { /* change div to reference your elements you put in <Masonry> */
     /* background: grey; */
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+  }
+
+  .my-masonry-grid_column > .imageItem img {
+    margin-bottom: -5px;
   }

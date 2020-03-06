@@ -5,7 +5,7 @@ import {
   Redirect,
   Switch
 } from "react-router-dom";
-
+import Search from "./pages/Search/Search";
 import User from "./pages/User/User";
 import Auth from "./pages/Auth/Auth";
 import Header from "./components/Header/Header";
@@ -25,9 +25,11 @@ const App = () => {
         <Route path="/:userId" exact>
           <User />
         </Route>
+        <Route path="/search/:query">
+          <Search />
+        </Route>
       </Switch>
     );
-    
   } else {
     routes = (
       <Switch>
@@ -36,6 +38,9 @@ const App = () => {
         </Route>
         <Route path="/auth" exact>
           <Auth />
+        </Route>
+        <Route path="/search/:query">
+          <Search />
         </Route>
         <Redirect to="/auth" />
       </Switch>
