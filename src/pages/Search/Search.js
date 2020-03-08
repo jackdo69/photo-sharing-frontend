@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
-import ImageItem from "../../components/Image/ImageItem";
+import PhotoItem from "../../components/Photo/PhotoItem";
 import ErrorModal from "../../components/Modal/ErrorModal";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { useHttpClient } from "../../hooks/http-hook";
@@ -47,7 +47,7 @@ const Search = () => {
     if (filtered.length > 0) {
       photosGrid = filtered.map(photo => {
         return (
-          <ImageItem
+          <PhotoItem
             src={`http://localhost:5000/${photo.image}`}
             alt={photo.name}
             key={photo.id}

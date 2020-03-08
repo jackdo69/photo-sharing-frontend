@@ -9,7 +9,7 @@ import Search from "./pages/Search/Search";
 import User from "./pages/User/User";
 import Auth from "./pages/Auth/Auth";
 import Header from "./components/Header/Header";
-import ImageList from "./pages/ImageList/ImageList";
+import FrontPage from "./pages/FrontPage/FrontPage";
 import { AuthContext } from "./context/auth-context";
 import useAuth from "./hooks/auth-hook";
 
@@ -20,7 +20,7 @@ const App = () => {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <ImageList />
+          <FrontPage />
         </Route>
         <Route path="/:userId" exact>
           <User />
@@ -34,7 +34,7 @@ const App = () => {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <ImageList />
+          <FrontPage />
         </Route>
         <Route path="/auth" exact>
           <Auth />

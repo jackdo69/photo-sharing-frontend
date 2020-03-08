@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './ImageDetails.css';
+import './PhotoDetails.css';
 
-const ImageDetails = (props) => {
+const PhotoDetails = (props) => {
     return <div className="imageDetails">
         <div className="imageLargeSize">
             <img src={props.src} alt={props.name} />
@@ -13,4 +13,4 @@ const ImageDetails = (props) => {
     </div>;
 }
  
-export default ImageDetails;
+export default PhotoDetails;

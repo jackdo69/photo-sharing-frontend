@@ -1,18 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
-import "./ImageItem.css";
+import "./PhotoItem.css";
 
 import { useParams, useHistory } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import ErrorModal from "../Modal/ErrorModal";
 import Modal from "../Modal/Modal";
 import Backdrop from "../Backdrop/Backdrop";
-import ImageDetails from "./ImageDetails";
+import ImageDetails from "./PhotoDetails";
 import EditPhoto from "./EditPhoto";
 import DeletePhoto from "./DeletePhoto";
 import { AuthContext } from "../../context/auth-context";
 import { useHttpClient } from "../../hooks/http-hook";
 
-const ImageItem = props => {
+const PhotoItem = props => {
   const params = useParams();
   const auth = useContext(AuthContext);
   const history = useHistory();
@@ -127,4 +127,4 @@ const ImageItem = props => {
   );
 };
 
-export default ImageItem;
+export default PhotoItem;

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import Modal from "../../components/Modal/Modal";
-import Button from "../../components/Button/Button";
-import Input from "../../components/Input/Input";
-import ImageUpload from "../../components/ImageUpload/ImageUpload";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import ErrorModal from "../../components/Modal/ErrorModal";
+import Modal from "../Modal/Modal";
+import Button from "../Button/Button";
+import Input from "../Input/Input";
+import ImageUpload from "../ImageUpload/ImageUpload";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import ErrorModal from "../Modal/ErrorModal";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH

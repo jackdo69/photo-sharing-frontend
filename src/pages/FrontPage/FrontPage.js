@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
-import ImageItem from "../../components/Image/ImageItem";
+import PhotoItem from "../../components/Photo/PhotoItem";
 import ErrorModal from "../../components/Modal/ErrorModal";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { useHttpClient } from "../../hooks/http-hook";
-import "./ImageList.css";
+import "./FrontPage.css";
 
 //Masonry setup
 const breakpointColumnsObj = {
@@ -14,7 +14,7 @@ const breakpointColumnsObj = {
   500: 1
 };
 
-const ImageList = () => {
+const FrontPage = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedPhotos, setLoadedPhotos] = useState(null);
 
@@ -32,7 +32,7 @@ const ImageList = () => {
   if (loadedPhotos) {
     photosGrid = loadedPhotos.map(photo => {
       return (
-        <ImageItem
+        <PhotoItem
           src={`http://localhost:5000/${photo.image}`}
           alt={photo.name}
           key={photo.id}
@@ -67,4 +67,4 @@ const ImageList = () => {
   );
 };
 
-export default ImageList;
+export default FrontPage;

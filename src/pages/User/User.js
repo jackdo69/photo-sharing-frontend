@@ -4,13 +4,13 @@ import "./User.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import ErrorModal from "../../components/Modal/ErrorModal";
 import Button from "../../components/Button/Button";
-import ImageItem from "../../components/Image/ImageItem";
+import PhotoItem from "../../components/Photo/PhotoItem";
 import Backdrop from "../../components/Backdrop/Backdrop";
 import { useHttpClient } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 import Tabs from "./Tabs";
 import Panel from "./Panel";
-import AddPhoto from "./AddPhoto";
+import AddPhoto from "../../components/Photo/AddPhoto";
 import Masonry from "react-masonry-css";
 
 //Masonry setup
@@ -83,7 +83,7 @@ const User = () => {
     uploadedPhotosGrid = uploadedPhotos.map(photo => {
       return (
         <React.Fragment key={photo.id}>
-          <ImageItem
+          <PhotoItem
             src={`http://localhost:5000/${photo.image}`}
             alt={photo.name}
             creator={photo.creator}
@@ -102,7 +102,7 @@ const User = () => {
     likedPhotosGrid = likedPhotos.map(photo => {
       return (
         <React.Fragment key={photo.id}>
-          <ImageItem
+          <PhotoItem
             src={`http://localhost:5000/${photo.image}`}
             alt={photo.name}
             creator={photo.creator}
