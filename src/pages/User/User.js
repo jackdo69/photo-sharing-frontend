@@ -26,6 +26,7 @@ const User = () => {
   const userId = auth.userId;
   const [loadedUser, setLoadedUser] = useState();
   const [uploadedPhotos, setUploadedPhotos] = useState();
+  const [likedPhotos, setLikedPhotos] = useState();
   const [showAdd, setShowAdd] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -51,9 +52,21 @@ const User = () => {
       } catch (err) {}
     };
 
+    const fetchLikedPhotos = async () => {
+      try {
+        let res = await sendRequest(
+          `http://localhost:5000/api/photos/user/like/${userId}`
+        );
+          
+        setLikedPhotos(res.photos);
+      } catch (err) {}
+    };
+
     if (userId) {
       fetchUser();
       fetchUploadedPhotos();
+      fetchLikedPhotos();
+      
     }
   }, [sendRequest, userId]);
 
@@ -65,9 +78,9 @@ const User = () => {
     );
   }
 
-  let photosGrid;
+  let uploadedPhotosGrid;
   if (uploadedPhotos) {
-    photosGrid = uploadedPhotos.map(photo => {
+    uploadedPhotosGrid = uploadedPhotos.map(photo => {
       return (
         <React.Fragment key={photo.id}>
           <ImageItem
@@ -77,12 +90,31 @@ const User = () => {
             description={photo.description}
             name={photo.name}
             id={photo.id}
+            likedBy={photo.likedBy}
           />
         </React.Fragment>
       );
     });
   }
-  
+
+  let likedPhotosGrid;
+  if (likedPhotos) {
+    likedPhotosGrid = likedPhotos.map(photo => {
+      return (
+        <React.Fragment key={photo.id}>
+          <ImageItem
+            src={`http://localhost:5000/${photo.image}`}
+            alt={photo.name}
+            creator={photo.creator}
+            description={photo.description}
+            name={photo.name}
+            id={photo.id}
+            likedBy={photo.likedBy}
+          />
+        </React.Fragment>
+      );
+    });
+  }
 
   return (
     <React.Fragment>
@@ -118,11 +150,18 @@ const User = () => {
               className="my-masonry-grid"
               columnClassName="my-masonry-grid_column"
             >
-              {photosGrid}
+              {uploadedPhotosGrid}
             </Masonry>
           </Panel>
-          <Panel title="Collection">This is the second panel</Panel>
-          <Panel title="Liked">This is the third panel</Panel>
+          <Panel title="Liked">
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {likedPhotosGrid}
+            </Masonry>
+          </Panel>
         </Tabs>
       </div>
     </React.Fragment>

@@ -40,6 +40,7 @@ const ImageList = () => {
           creator={photo.creator}
           description={photo.description}
           name={photo.name}
+          likedBy={photo.likedBy}
         />
       );
     });

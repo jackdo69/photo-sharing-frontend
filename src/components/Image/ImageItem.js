@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./ImageItem.css";
 
 import { useParams, useHistory } from "react-router-dom";
@@ -19,29 +19,37 @@ const ImageItem = props => {
   const [showDetails, setShowDetails] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [liked, setLiked] = useState("");
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const openShowDetailsHandler = event => {
     setShowDetails(true);
     event.stopPropagation();
   };
 
-  const likePhoto = async (event) => {
+  useEffect(() => {
+    if (props.likedBy.includes(auth.userId)) {
+      setLiked("like");
+    }
+  }, [props.likedBy, auth.userId]);
+
+  const likePhoto = async event => {
     if (!auth.token) {
       history.push("/auth");
     } else {
       try {
-        event.preventDefault();
+        // event.preventDefault();
         const res = await sendRequest(
           "http://localhost:5000/api/photos/user/like",
           "PATCH",
           JSON.stringify({
             photoId: props.id,
-            userId: props.creator
+            userId: auth.userId
           }),
           {
             "Content-Type": "application/json"
           }
         );
+        setLiked("like");
         console.log(res);
       } catch (err) {}
     }
@@ -61,11 +69,8 @@ const ImageItem = props => {
   } else {
     controls = (
       <div className="utilities">
-        <button onClick={() => likePhoto()}>
+        <button className={liked} onClick={() => likePhoto()}>
           <i className="fas fa-heart"></i>
-        </button>
-        <button>
-          <i className="fas fa-plus"></i>
         </button>
         <button>
           <i className="fas fa-long-arrow-alt-down"></i>
