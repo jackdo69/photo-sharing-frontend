@@ -52,3 +52,8 @@
 .controls button:hover {
   color: rgb(53, 46, 46);
 }
+
+.utilities button:focus,
+.utilities button:visited {
+  color: rgb(250, 99, 99);
+}

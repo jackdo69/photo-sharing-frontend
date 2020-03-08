@@ -1,23 +1,50 @@
 import React, { useState, useContext } from "react";
 import "./ImageItem.css";
 
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import ErrorModal from "../Modal/ErrorModal";
 import Modal from "../Modal/Modal";
 import Backdrop from "../Backdrop/Backdrop";
 import ImageDetails from "./ImageDetails";
 import EditPhoto from "./EditPhoto";
 import DeletePhoto from "./DeletePhoto";
 import { AuthContext } from "../../context/auth-context";
+import { useHttpClient } from "../../hooks/http-hook";
 
 const ImageItem = props => {
   const params = useParams();
   const auth = useContext(AuthContext);
+  const history = useHistory();
   const [showDetails, setShowDetails] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const openShowDetailsHandler = event => {
     setShowDetails(true);
     event.stopPropagation();
+  };
+
+  const likePhoto = async (event) => {
+    if (!auth.token) {
+      history.push("/auth");
+    } else {
+      try {
+        event.preventDefault();
+        const res = await sendRequest(
+          "http://localhost:5000/api/photos/user/like",
+          "PATCH",
+          JSON.stringify({
+            photoId: props.id,
+            userId: props.creator
+          }),
+          {
+            "Content-Type": "application/json"
+          }
+        );
+        console.log(res);
+      } catch (err) {}
+    }
   };
   let controls;
   if (auth.userId === props.creator && params.userId) {
@@ -34,7 +61,7 @@ const ImageItem = props => {
   } else {
     controls = (
       <div className="utilities">
-        <button>
+        <button onClick={() => likePhoto()}>
           <i className="fas fa-heart"></i>
         </button>
         <button>
@@ -49,6 +76,8 @@ const ImageItem = props => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && <LoadingSpinner asOverlay />}
       {showDetails && <Backdrop onClick={() => setShowDetails(false)} />}
       {showEdit && <Backdrop onClick={() => setShowEdit(false)} />}
       {showDelete && <Backdrop onClick={() => setShowDelete(false)} />}

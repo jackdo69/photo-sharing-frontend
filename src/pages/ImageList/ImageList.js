@@ -36,6 +36,7 @@ const ImageList = () => {
           src={`http://localhost:5000/${photo.image}`}
           alt={photo.name}
           key={photo.id}
+          id={photo.id}
           creator={photo.creator}
           description={photo.description}
           name={photo.name}
