@@ -32,7 +32,7 @@ const PhotoItem = props => {
     }
   }, [props.likedBy, auth.userId]);
 
-  const likePhoto = async event => {
+  const likePhoto = async () => {
     if (!auth.token) {
       history.push("/auth");
     } else {
@@ -54,6 +54,17 @@ const PhotoItem = props => {
       } catch (err) {}
     }
   };
+
+  const downloadPhoto = async () => {
+    if (!auth.token) {
+      history.push("/auth");
+    } else {
+      try {
+        window.location.assign(`http://localhost:5000/api/photos/user/download/${props.id}`);
+      } catch (err) {}
+    }
+  };
+
   let controls;
   if (auth.userId === props.creator && params.userId) {
     controls = (
@@ -72,8 +83,8 @@ const PhotoItem = props => {
         <button className={liked} onClick={() => likePhoto()}>
           <i className="fas fa-heart"></i>
         </button>
-        <button>
-          <i className="fas fa-long-arrow-alt-down"></i>
+        <button onClick={() => downloadPhoto()}>
+        <i className="fas fa-long-arrow-alt-down"></i>
         </button>
       </div>
     );

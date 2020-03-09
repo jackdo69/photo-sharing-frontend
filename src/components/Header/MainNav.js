@@ -12,7 +12,7 @@ const MainNav = () => {
       {!auth.isLoggedIn ? (
         <NavLink to="/auth">Login</NavLink>
       ) : (
-        <NavLink to="/" onClick={auth.logout}>Logout</NavLink>
+        <NavLink to="/auth" onClick={auth.logout}>Logout</NavLink>
       )}
     </div>
   );
