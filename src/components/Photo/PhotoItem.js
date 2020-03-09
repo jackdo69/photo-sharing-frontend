@@ -19,7 +19,7 @@ const PhotoItem = props => {
   const [showDetails, setShowDetails] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [liked, setLiked] = useState("");
+  const [liked, setLiked] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const openShowDetailsHandler = event => {
     setShowDetails(true);
