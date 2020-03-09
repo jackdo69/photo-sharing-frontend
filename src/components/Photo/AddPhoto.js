@@ -41,7 +41,7 @@ const AddPhoto = props => {
       formData.append("description", formState.inputs.description.value);
       formData.append("image", formState.inputs.image.value);
       const res = await sendRequest(
-        "http://localhost:5000/api/photos",
+        process.env.REACT_APP_BACKEND_URL + "/api/photos",
         "POST",
         formData,
         {

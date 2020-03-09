@@ -39,7 +39,7 @@ const PhotoItem = props => {
       try {
         // event.preventDefault();
         const res = await sendRequest(
-          "http://localhost:5000/api/photos/user/like",
+          process.env.REACT_APP_BACKEND_URL + "/api/photos/user/like",
           "PATCH",
           JSON.stringify({
             photoId: props.id,
@@ -60,7 +60,7 @@ const PhotoItem = props => {
       history.push("/auth");
     } else {
       try {
-        window.location.assign(`http://localhost:5000/api/photos/user/download/${props.id}`);
+        window.location.assign(`${process.env.REACT_APP_BACKEND_URL}/api/photos/user/download/${props.id}`);
       } catch (err) {}
     }
   };

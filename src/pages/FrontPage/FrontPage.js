@@ -21,7 +21,7 @@ const FrontPage = () => {
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const res = await sendRequest("http://localhost:5000/api/photos");
+        const res = await sendRequest(process.env.REACT_APP_BACKEND_URL + "/api/photos");
         setLoadedPhotos(res.photos);
       } catch (err) {}
     };
@@ -33,7 +33,7 @@ const FrontPage = () => {
     photosGrid = loadedPhotos.map(photo => {
       return (
         <PhotoItem
-          src={`http://localhost:5000/${photo.image}`}
+          src={`${process.env.REACT_APP_BACKEND_URL}/${photo.image}`}
           alt={photo.name}
           key={photo.id}
           id={photo.id}

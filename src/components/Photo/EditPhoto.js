@@ -32,7 +32,7 @@ const EditPhoto = props => {
     
     try {
       const res = await sendRequest(
-        `http://localhost:5000/api/photos/${props.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/photos/${props.id}`,
         "PATCH",
         JSON.stringify({
           name: formState.inputs.name.value,

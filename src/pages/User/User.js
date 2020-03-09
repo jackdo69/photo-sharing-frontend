@@ -36,7 +36,7 @@ const User = () => {
     const fetchUser = async () => {
       try {
         let res = await sendRequest(
-          `http://localhost:5000/api/users/${userId}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`
         );
         setLoadedUser(res.user);
       } catch (err) {}
@@ -45,7 +45,7 @@ const User = () => {
     const fetchUploadedPhotos = async () => {
       try {
         let res = await sendRequest(
-          `http://localhost:5000/api/photos/user/${userId}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/photos/user/${userId}`
         );
 
         setUploadedPhotos(res.photos);
@@ -55,7 +55,7 @@ const User = () => {
     const fetchLikedPhotos = async () => {
       try {
         let res = await sendRequest(
-          `http://localhost:5000/api/photos/user/like/${userId}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/photos/user/like/${userId}`
         );
           
         setLikedPhotos(res.photos);
@@ -84,7 +84,7 @@ const User = () => {
       return (
         <React.Fragment key={photo.id}>
           <PhotoItem
-            src={`http://localhost:5000/${photo.image}`}
+            src={`${process.env.REACT_APP_BACKEND_URL}/${photo.image}`}
             alt={photo.name}
             creator={photo.creator}
             description={photo.description}
@@ -103,7 +103,7 @@ const User = () => {
       return (
         <React.Fragment key={photo.id}>
           <PhotoItem
-            src={`http://localhost:5000/${photo.image}`}
+            src={`${process.env.REACT_APP_BACKEND_URL}/${photo.image}`}
             alt={photo.name}
             creator={photo.creator}
             description={photo.description}
@@ -128,7 +128,7 @@ const User = () => {
           <div className="userPanel">
             <div className="profile">
               <img
-                src={`http://localhost:5000/${loadedUser.image}`}
+                src={`${process.env.REACT_APP_BACKEND_URL}/${loadedUser.image}`}
                 alt="Profile"
               />
             </div>

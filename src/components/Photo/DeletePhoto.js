@@ -11,7 +11,7 @@ const DeletePhoto = props => {
   const confirmDeleteHandler = async () => {
     try {
       const res = await sendRequest(
-        `http://localhost:5000/api/photos/${props.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/photos/${props.id}`,
         "DELETE",
         null,
         {
