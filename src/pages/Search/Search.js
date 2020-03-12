@@ -48,7 +48,7 @@ const Search = () => {
       photosGrid = filtered.map(photo => {
         return (
           <PhotoItem
-            src={`${process.env.REACT_APP_BACKEND_URL}/${photo.image}`}
+            src={`${photo.image}`}
             alt={photo.name}
             key={photo.id}
             creator={photo.creator}

@@ -33,7 +33,7 @@ const FrontPage = () => {
     photosGrid = loadedPhotos.map(photo => {
       return (
         <PhotoItem
-          src={`${process.env.REACT_APP_BACKEND_URL}/${photo.image}`}
+          src={`${photo.image}`}
           alt={photo.name}
           key={photo.id}
           id={photo.id}
