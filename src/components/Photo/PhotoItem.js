@@ -60,7 +60,11 @@ const PhotoItem = props => {
       history.push("/auth");
     } else {
       try {
-        window.location.assign(`${process.env.REACT_APP_BACKEND_URL}/api/photos/user/download/${props.id}`);
+        const res = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/api/photos/user/download/${props.id}`
+        );
+        
+        window.location.assign(res.url);
       } catch (err) {}
     }
   };
@@ -84,7 +88,7 @@ const PhotoItem = props => {
           <i className="fas fa-heart"></i>
         </button>
         <button onClick={() => downloadPhoto()}>
-        <i className="fas fa-long-arrow-alt-down"></i>
+          <i className="fas fa-long-arrow-alt-down"></i>
         </button>
       </div>
     );
