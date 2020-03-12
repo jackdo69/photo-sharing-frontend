@@ -103,7 +103,7 @@ const User = () => {
       return (
         <React.Fragment key={photo.id}>
           <PhotoItem
-            src={`${process.env.REACT_APP_BACKEND_URL}/${photo.image}`}
+            src={`${photo.image}`}
             alt={photo.name}
             creator={photo.creator}
             description={photo.description}
