@@ -128,7 +128,7 @@ const User = () => {
           <div className="userPanel">
             <div className="profile">
               <img
-                src={`${process.env.REACT_APP_BACKEND_URL}/${loadedUser.image}`}
+                src={`${loadedUser.image}`}
                 alt="Profile"
               />
             </div>
